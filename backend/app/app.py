@@ -4,6 +4,7 @@ from beanie import init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from app.models.user_model import User
+from app.models.todo_model import Todo
 from app.api.api_v1.router import router
 
 app = FastAPI(
@@ -21,6 +22,6 @@ async def app_init():
     database = client.todo_database
     
     # Initialize Beanie with the database and document models
-    await init_beanie(database=database, document_models=[User])  # Add your document models here   
+    await init_beanie(database=database, document_models=[User, Todo])  # Add your document models here   
 
 app.include_router(router, prefix=settings.API_V1_STR)
