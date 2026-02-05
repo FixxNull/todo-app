@@ -2,6 +2,9 @@
 
 Full-stack Todo application with real-time CRUD operations. Backend built with Python FastAPI, MongoDB database, and React frontend with Chakra UI.
 
+## Apllication design preview
+![](image.png)
+
 ## Features
 
 - **Create, read, update, delete todos**
@@ -66,7 +69,7 @@ Prerequisites
 
     ```
     # Run with auto-reload
-    uvicorn main:app --reload
+    uvicorn app.app:app --reload
     ```
 2. Frontend
     ```
