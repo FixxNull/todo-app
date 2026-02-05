@@ -1,8 +1,22 @@
 import React, { useEffect, useState , useRef, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Spinner, Text, Center, Container, Button, useColorModeValue,  useToast } from "@chakra-ui/react";
+import { 
+    Spinner, 
+    Text, 
+    Center, 
+    Container,
+    Button, 
+    useColorModeValue,  
+    useToast, 
+    Flex,
+    IconButton, 
+    Box } from "@chakra-ui/react";
+
 import axiosInstance from "../../services/axios";
 import { AddUpdateTodoModal } from "./AddUpdateTodoModal";
+
+import { FaTrashAlt } from "react-icons/fa";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 export const TodoDetail = () => {
     const [todo, setTodo] = useState({});
@@ -11,7 +25,7 @@ export const TodoDetail = () => {
     const isMounted = useRef(false);
     const navigate = useNavigate();
     const toast = useToast();
-    const background = useColorModeValue("gray.300", "gray.600")
+    const background =  useColorModeValue('gray.100', 'gray.600');
 
     const fetchTodo = useCallback(() => {
         setLoading(true);
@@ -80,42 +94,54 @@ export const TodoDetail = () => {
     return (
         <>
             <Container mt={6}>
-                <Button 
-                    colorScheme="gray"
+                <IconButton
                     onClick={() => navigate("/", { replace: true })}
-                >Back</Button>
-            </Container>
-            <Container 
-                bg={background} 
-                minHeight="7rem"
-                my={3}
-                p={3}
-                rounded="lg"
-                alignItems="center"
-                justifyContent="space-between"
-            >
-                <Text fontSize={22}>{todo.title}</Text>
-                <Text bg="gray.500" mt={2} p={2} rounded="lg">
-                    {todo.description}
-                </Text>
-                <AddUpdateTodoModal
-                    my={3}
-                    editable={true}
-                    defaultValues={{
-                        title: todo.title,
-                        description: todo.description,
-                        status: todo.status,
-                    }}
-                    onSuccess={fetchTodo}
+                    isRound={true}
+                    aria-label="Back"
+                    icon={<IoMdArrowRoundBack fontSize={20}/>}
                 />
-                 <Button
-                    isLoading={loading}
-                    colorScheme="red"
-                    width="100%"
-                    onClick={deleteTodo}
+
+                <Container 
+                    shadow="lg"
+                    bg={background} 
+                    minHeight="7rem"
+                    my={3}
+                    p={3}
+                    rounded="lg"
+                    alignItems="center"
+                    justifyContent="space-between"
                 >
-                    Delete
-                </Button>
+                    <Text fontSize={22}>{todo.title}</Text>
+                    <Text bg="gray.300" mt={2} p={2} rounded="lg">
+                        {todo.description}
+                    </Text>
+                    <Flex w="100%" gap={4}>
+                        <AddUpdateTodoModal
+                            flex={1}
+                            my={3}
+                            editable={true}
+                            defaultValues={{
+                                title: todo.title,
+                                description: todo.description,
+                                status: todo.status,
+                            }}
+                            onSuccess={fetchTodo}
+                        />
+                        <Button mt={3}
+                            flex={1}
+                            isLoading={loading}
+                            bg="orange"
+                            color="white"
+                            w="100%"
+                            onClick={deleteTodo}
+                        >
+                            <Box as="span" mr="2">
+                                 <FaTrashAlt />
+                            </Box>
+                            Delete
+                        </Button>
+                    </Flex>
+                </Container>
             </Container>
         </>
     );

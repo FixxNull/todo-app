@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 export const TodoCard = ({ todo }) => {
     const navigate = useNavigate();
     return (
-        <Flex 
-            bg={useColorModeValue("gray.300", "gray.600")} 
+        <Flex
+            shadow="lg" 
+            background={useColorModeValue('gray.300', 'gray.600')} 
             minHeight="3rem" 
             p={3}
             my={3}
@@ -21,7 +22,10 @@ export const TodoCard = ({ todo }) => {
             onClick={() => navigate(`/${todo.todo_id}`, { replace: true })} 
         >
             <Text>{todo.title}</Text>
-            <Badge colorScheme={todo.status ? "green" : "purple"}>{todo.status ? "Completed" : "Pending"}</Badge>
+            <Badge 
+                colorScheme={todo.status ? "green" : "yellow"}>
+                    {todo.status ? "Completed" : "Pending"}
+            </Badge>
         </Flex>
     );
 }

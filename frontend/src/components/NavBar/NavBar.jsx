@@ -1,36 +1,46 @@
 import React from "react";
-import { Box, Flex, useColorModeValue, Text, Stack, Button, Image } from "@chakra-ui/react";
+import { 
+    Box, 
+    Flex, 
+    useColorModeValue, 
+    Stack,
+    IconButton, 
+    Image } from "@chakra-ui/react";
 import { ThemeToggler } from "../Thene/ThemeToggler";
 import { useAuth } from "../../hooks/useAuth";
 import { Outlet } from "react-router-dom";
+import { CiLogout } from "react-icons/ci";
 
 export const NavBar = () => {
     const { logout } = useAuth();
-    const logoSrc = '/todo-app.svg';
     return (
-        <Box minHeight="100зч">
+        <Box>
             <Flex as="nav"
                 align="center"
                 justify="space-between"
                 wrap="wrap"
                 p={2}
-                bg={useColorModeValue('green.300', 'green.600')}
+                bg={useColorModeValue('green.400', 'green.800')}
                 color="white"
             >
-                {/* <Stack direction="row" align="left" spacing={4}>
+                <Stack direction="row" align="left" spacing={4}>
                     <Image 
-                    src={logoSrc} 
-                    alt="TodoApp Logo" 
-                    width="200px"      
-                    height="80px"      
-                    maxHeight="80px"  
+                        src='/todo-app.svg'
+                        alt="TodoApp Logo" 
+                        width="200px"        
                     />
-                </Stack> */}
-                <Text as="h2" fontSize="24" fontWeight="bold">Todo-App</Text>
+                </Stack>
                 <Stack direction="row" align="center" spacing={4}>
                     {/* Additional NavBar content can go here */}
                     <ThemeToggler size="lg"/>
-                    <Button onClick={logout} colorScheme="green">Logout</Button>
+                    <IconButton
+                        onClick={logout}
+                        colorScheme="green"  // Вместо color="white"
+                        isRound={true}
+                        aria-label="Logout"
+                        icon={<CiLogout fontSize={20}/>}
+                        size="sm"
+                    />
                 </Stack>
             </Flex>
             <Outlet />

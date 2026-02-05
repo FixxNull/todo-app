@@ -23,6 +23,8 @@ import { Box,
 import { useForm, Controller } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import axiosInstance from "../../services/axios";
+import { IoMdAdd } from "react-icons/io";
+import { RiFileEditFill } from "react-icons/ri";
 
 export const AddUpdateTodoModal = ({
     editable=false,
@@ -70,8 +72,11 @@ export const AddUpdateTodoModal = ({
 
     return (
         <Box {...rest}>
-            <Button w="100%" colorScheme="green" onClick={onOpen}>
-                {editable ? "Update Todo" : "Add Todo"}
+            <Button w="100%" colorScheme="green" color="white" onClick={onOpen} iconSpacing="5">
+                <Box as="span" mr="2">
+                    {editable ? <RiFileEditFill fontSize={20} /> : <IoMdAdd fontSize={20}/>}
+                </Box>
+                {editable ? "Edit" : "Add Todo"}
             </Button>
             <Modal
                 size="xl"
@@ -109,7 +114,7 @@ export const AddUpdateTodoModal = ({
                                 />
                                 <FormErrorMessage>{errors.title && errors.title?.message}</FormErrorMessage>
                             </FormControl>
-                             <FormControl isInvalid={errors.description}>
+                            <FormControl isInvalid={errors.description}>
                                 <Textarea 
                                     rows={5}
                                     placeholder="Add description..."
