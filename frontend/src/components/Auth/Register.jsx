@@ -1,15 +1,44 @@
 import React from 'react';
-import { Flex, useColorModeValue, Heading, FormControl, Input, FormErrorMessage, Button } from '@chakra-ui/react';
+import { Flex, 
+         useColorModeValue, 
+         Heading, 
+         FormControl, 
+         Input, 
+         FormErrorMessage, 
+         Button,
+         useToast } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { ThemeToggler } from '../Thene/ThemeToggler';
+import axiosInstance from '../../services/axios';
 
 export const Register = () => {
     const {handleSubmit, register, formState: { errors, isSubmitting }} = useForm();
     const navigate = useNavigate();
-    const onSubmit = (values) => {
+    const toast = useToast();
+
+    const onSubmit = async (values) => {
         // Handle form submission
-        console.log(values);
+        try {
+            await axiosInstance.post('/users/create/', values); 
+            toast({
+                title: "Account created.",
+                description: "Your account has been created successfully. You can now log in.",
+                status: "success",
+                duration: 1500,
+                isClosable: true,
+            });
+            navigate('/login', { replace: true });
+        } catch (error) {
+            toast({
+                title: "Registration failed.",
+                description: error.response?.data?.detail || "An error occurred during registration.",
+                status: "error",
+                duration: 1500,
+                isClosable: true
+            });
+            console.error("Registration error:", error);
+        }
     };
 
     return (
