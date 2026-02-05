@@ -24,10 +24,9 @@ Full-stack Todo application with real-time CRUD operations. Backend built with P
 Prerequisites
 
 - **Python 3.11+**
-- **Node.js 18+
+- **Node.js 18+**
 - **MongoDB (local or Atlas)**
 
-### Quick Start
 
 1. **Clone & Install Backend**
     ```
@@ -49,4 +48,31 @@ Prerequisites
     ```
     Frontend: http://localhost:3000
     Backend API: http://localhost:8000/docs
+    ```
+
+## API Endpoints
+
+| Method |    Endpoint     |    Description   |
+|--------|-----------------|------------------|
+| POST   | `/todo/create/` | Create new todo  |
+| GET    | `/todo/`        | Get all todos    |
+| GET    | `/todo/{id}/`   | Get todo details |
+| PUT    | `/todo/{id}/`   | Update todo      |
+| DELETE | `/todo/{id}/`   | Delete todo      |
+
+## Development
+
+1. Backend
+
+    ```
+    # Run with auto-reload
+    uvicorn main:app --reload
+    ```
+2. Frontend
+    ```
+    # Development server
+    npm start
+
+    # Build for production
+    npm run build
     ```
