@@ -2,7 +2,7 @@
 
 Full-stack Todo application with real-time CRUD operations. Backend built with Python FastAPI, MongoDB database, and React frontend with Chakra UI.
 
-## Apllication design preview
+## Application design preview
 ![](image.png)
 
 ## Features
